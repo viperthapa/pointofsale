@@ -1,0 +1,54 @@
+{% extends 'admintemplates/adminbase.html' %}
+{% load static %}
+{% block content %}
+<br>
+<br>
+<br>
+<head>
+        <style>
+            .card{
+                background-color:burlywood;
+                width: 100%;
+                margin-left:350px;
+                height: 150px;
+                padding: 20px;
+                }
+            .text-default{
+                color: white;
+            }
+            .card a {
+                    text-decoration: none;
+                    color: white;
+            }
+           
+        </style>
+    </head> 
+<body>      
+    
+
+<h3 class="text-center">Billing</h3>
+
+ <body style="margin: 0px;" class="row">
+    <div class="col-md-4">    
+        <div class="card">
+                <div class="card-body">
+                    <h2 style="text-align: center;">Customer</h2>
+                    <form action="#" method="post"> 
+                        {% csrf_token %}
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Enter Customer name: </span>
+                              </div>
+                                <input class="btn btn-default"  name="name" placeholder="customer name"/>
+                                <button class="btn btn-primary type="submit">Go &raquo;</button>
+
+                            </div>
+                    </form>
+
+                </div>
+        </div>
+        
+    </div>
+
+</body>
+{% endblock %}

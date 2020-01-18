@@ -1,0 +1,28 @@
+{% extends 'admintemplates/adminbase.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <br>
+	<br>
+    
+	<div class="row col-1 container">
+		<div class="col-md-12">
+			<h4><u>Update Book</u></h4>
+			<form method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+				{{form.as_p}}
+				<button class="btn btn-primary">submit</button>
+
+				
+
+
+			</form>
+				
+		</div>
+		<br>
+
+
+	</div>
+</div>
+
+{% endblock %}

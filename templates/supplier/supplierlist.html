@@ -1,0 +1,46 @@
+{% extends 'admintemplates/adminbase.html' %}
+{% load static %}
+{% block content %}
+	<div class="row">
+		<div class="col-md-12 table-responsive-sm">
+            <br>
+			<a href="{% url 'posapp:studentcreate' %}" class="btn btn-info"><i class="fa fa-plus"></i></a>
+			
+			<table class="table table-bordered">
+				<thead style="background-color: yellow;color:black;">
+					<tr class="text-dark">
+						<th>S.N</th>
+						<th>Name</th>
+						<th>Address</th>
+						<th>Phone</th>
+						<th>Mobile_no</th>
+						<th>action</th>
+				
+					</tr>	
+
+				</thead>
+				<tbody>
+					{% for suppliers in suppliers %}
+					<tr style="color: black;">
+						<td>{{ forloop.counter }}</td>
+						<td>{{ suppliers.name }}</td>
+						<td>{{ suppliers.address }}</td>
+						<td>{{ suppliers.phone }}</td>
+						<td>{{ suppliers.mobile_no }}</td>
+					
+						<td>
+                            <a href="{% url 'posapp:supplierupdate' suppliers.id %}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+							<a href="{% url 'posapp:supplierdelete' suppliers.id %}" class="btn btn-success"><i class="fa fa-trash"></i></a>
+
+						</td>
+
+					</tr>	
+
+
+					{% endfor %}
+				</tbody>
+					
+			</table>
+		</div>
+	</div>
+{% endblock %}

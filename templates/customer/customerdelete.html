@@ -1,0 +1,26 @@
+{% extends 'admintemplates/adminbase.html' %}
+{% load static %}
+{% block content %}
+<div class="row col-1">
+	<div class="col-md-12">
+		<form method="post">
+			{% csrf_token %}
+			<h4>Are you sure you want to delete?</h4>
+			<button class="btn btn-danger">Delete</button>
+
+
+
+			
+
+		</form>
+			
+
+		
+
+	</div>
+	
+
+
+</div>
+<br>
+{% endblock %}

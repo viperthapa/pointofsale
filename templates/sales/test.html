@@ -1,0 +1,84 @@
+{% extends 'admintemplates/adminbase.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <br>
+    <br>
+    <br>
+
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h3><u>Customer</u></h3>
+            {% if customer.image %}
+              <img class="avatar img-thumbnail float-left img-fluid" src="{{ customer.image.url }}" style="width: 200px; margin-right: 1em;"/>
+            {% endif %}
+          <h3>Welcome:{{ customer.customer }}</h3>
+          <h4>Location:{{ customer.address }}</h4>
+        
+        </div>
+      </div>
+      <hr>
+      <div class="card">
+        <div class="card-header">
+          <h3><u>Add Products</u></h3>
+        </div>
+        <div class="card-body">
+          {% for product in products %}
+            <a href="#" onclick="addItem({{ product.id }}, '{{ product.name }}', {{ product.price }})" class="btn btn-outline-secondary">
+                <img src="{{product.image.url}}" style="width: 100px; margin-left: 1em;">
+                <br>
+              {{ product.name }}
+
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+                <h3><u>Generate Bill</u></h3>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title"><strong>Order summary</strong></h4>
+                </div>
+                <div class="panel-body">
+                  <div class="table-responsive">
+                    <table class="table table-condensed">
+                      <thead>
+                        <tr>
+                          <td><strong>Item</strong></td>
+                          <td class="text-right"><strong>Price</strong></td>
+                        </tr>
+                      </thead>
+                      <tbody id="summary-table-body">
+                        <tr id="total-tr">
+                          <td class="thick-line text-right"><strong>Total: </strong></td>
+                          <td class="thick-line text-right"><strong>₹0 </strong></td></tr>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="btn-group special" role="group">
+            {% csrf_token %}
+            <button type="button" class="btn btn-success" onclick="postOrder('{% url 'posapp:order' %}','{{ customer.identity }}')">Bill</button>
+            <button type="button" class="btn" onclick="clearAllItems()">Clear</button>
+            <button type="button" class="btn btn-danger" onclick="location.href='#'">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<script src="{% static 'js/script.js' %}"></script>
+
+{% endblock %}
+
+<!-- TODO:establish a relation bewtee customer and saleshistory using set-all  -->

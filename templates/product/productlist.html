@@ -1,0 +1,50 @@
+{% extends 'admintemplates/adminbase.html' %}
+{% load static %}
+{% block content %}
+	<div class="row">
+		<div class="col-md-12 table-responsive-sm">
+            <br>
+			<a href="#" class="btn btn-info"><i class="fa fa-plus"></i></a>
+            <br>
+			<table class="table table-bordered">
+				<thead style="background-color: yellow;color:black;">
+					<tr class="text-dark">
+						<th>S.N</th>
+						<th>Supplier</th>
+						<th>productname</th>
+						<th>Brand</th>
+                        <th>price</th>
+						<th>unit_type</th>
+						<th>action</th>
+                        
+				
+					</tr>	
+
+				</thead>
+				<tbody>
+					{% for product in products %}
+					<tr style="color: black;">
+						<td>{{ forloop.counter }}</td>
+						<td>{{ product.supplier.name }}</td>
+						<td>{{ product.name }}</td>
+						<td>{{ product.brand_name }}</td>
+                        <td>{{ product.price }}</td>
+						<td>{{ product.unit_type }}</td>
+                        
+					
+						<td>
+                            <a href="#" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+							<a href="#" class="btn btn-success"><i class="fa fa-trash"></i></a>
+
+						</td>
+
+					</tr>	
+
+
+					{% endfor %}
+				</tbody>
+					
+			</table>
+		</div>
+	</div>
+{% endblock %}

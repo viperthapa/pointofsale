@@ -1,0 +1,36 @@
+{% extends "login/base.html" %}
+{% load static %}
+{% block content %}
+	<h1 style="margin-top: 30px;">MyPos</h1>	
+	<div class=" w3l-login-form">
+		<h2>Login Here</h2>
+		<form  method="POST">
+			{% csrf_token %}
+			<div class=" w3l-form-group">
+				<label for="{{ form.username.id_for_label }}">Username:</label>
+				<div class="group">
+					<i class="fas fa-user"></i>
+					<p>{{ form.username }}</p>
+				</div>
+			</div>
+			<div class=" w3l-form-group">
+				<label for="{{ form.password.id_for_label }}">Password:</label>
+				<div class="group">
+					<i class="fas fa-unlock"></i>
+					<p>{{ form.password }}</p>
+					
+				</div>
+			</div>
+			{% if error %}
+				<li style="color: cornsilk;">{{error}}</li>
+			{% endif %}	
+			<br>
+	
+			<button type="submit">Login</button>
+		</form>
+	</div>
+	
+
+
+
+{% endblock %}
