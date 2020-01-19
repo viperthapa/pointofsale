@@ -10,7 +10,7 @@ function addItem(item_id, item_name, item_price) {
 
   var td_price = document.createElement('td');
   td_price.setAttribute('class', 'text-right');
-  td_price.innerHTML = '₹' + item_price;
+  td_price.innerHTML = 'Rs.' + item_price;
 
   total_price += item_price;
 
@@ -54,7 +54,7 @@ function getTotal(){
 
   var td_total_price = document.createElement('td');
   td_total_price.setAttribute('class', 'thick-line text-right');
-  td_total_price.innerHTML = "<strong>₹" + total_price + " </strong>";
+  td_total_price.innerHTML = "<strong>Rs." + total_price + " </strong>";
 
   tr_total.appendChild(td_total_display);
   tr_total.appendChild(td_total_price);

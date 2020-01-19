@@ -1,1 +1,58 @@
-<h3>order successfully created</h3>
+{% extends 'admintemplates/adminbase.html' %}
+{% load static %}
+{% block content %}
+
+<br>
+<br>
+<br>
+<head>
+        <style>
+            .card{
+                background-color:paleturquoise;
+                width: 100%;
+                margin-left:350px;
+                height: 150px;
+                padding: 20px;
+                }
+            .text-default{
+                color: white;
+            }
+            .card a {
+                    text-decoration: none;
+                    color: white;
+            }
+           
+        </style>
+    </head> 
+<body>      
+    
+
+<h3 class="text-center">myBill</h3>
+
+ <body style="margin: 0px;" class="row">
+    <div class="col-md-4">    
+        <div class="card">
+                <div class="card-body">
+                    <h2 style="text-align: center;">Order Successfull!</h2>
+                            <div class="input-group mb-3">
+                                    <a class="btn btn-primary" href="{% url 'posapp:bill' id%}" role="button" style="margin-left: 80px;">Generate bill</a>
+
+                            </div>
+
+
+                </div>
+        </div>
+        
+    </div>
+
+<!-- <br><br>
+<div class="d-flex justify-content-center">
+        <div class="alert alert-success" role="alert">
+          <h2 class="alert-heading">Order Successfull</h2>
+          <a class="btn btn-primary" href="#" role="button">Generate bill</a>
+        </div>
+       
+</div> -->
+<!-- <h3>order successfully created</h3> -->
+
+{% endblock %}

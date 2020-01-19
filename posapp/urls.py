@@ -33,6 +33,9 @@ urlpatterns = [
 
      path('billing/order', views.orderBill, name='order'),
 
+     path('bill/<int:pk>', views.BillGeneration, name='bill'),
+
+
 
 
 

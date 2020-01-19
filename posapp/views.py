@@ -7,6 +7,11 @@ from django.urls import reverse_lazy
 from django.http import JsonResponse, HttpResponseRedirect
 # from django.core.urlresolvers import reverse, reverse_lazy
 import json
+from django.template.loader import render_to_string
+from weasyprint import HTML
+import tempfile
+from django.http import HttpResponse
+
 
 # Create your views here.
 
@@ -92,7 +97,7 @@ class CustomerListView(TemplateView):
 
 
 
-#sucustomer add
+#customer add
 class CustomerCreateView(CreateView):
     template_name = 'customer/customeradd.html'
     form_class = CustomerForm
@@ -142,7 +147,7 @@ class SalesCreateView(FormView):
         return context
     
 
-
+#create invoice 
 def CreateInvoiceView(request):
     if request.method == 'GET':
         return render(request, 'sales/customerform.html')
@@ -159,7 +164,7 @@ def CreateInvoiceView(request):
         return render(request, 'sales/test.html', {'customer': customer, 'products': products})
 
 
-
+#order bill
 def orderBill(request):
     if request.method == 'POST':
         data = json.loads(request.POST.get('data', None))
@@ -176,4 +181,33 @@ def orderBill(request):
         if data['total_price']:
             customer.save()
         order.save()
-        return render(request, 'sales/orderbill.html')
+        print(order.id)
+        return render(request, 'sales/orderbill.html', context={'id':order.id})
+
+
+#bill generate
+def BillGeneration(request, pk):
+    """Generate pdf."""
+    
+    print(pk)
+    sales = Sales.objects.get(id=pk)
+    print(sales)
+    order = OrderItem.objects.filter(order=sales)
+    product = Product.objects.all()
+
+    # Rendered
+    html_string = render_to_string('bill/report.html', {'sales' : sales,'order' : order })
+    html = HTML(string=html_string)
+    result = html.write_pdf()
+
+    # Creating http response
+    response = HttpResponse(content_type='application/pdf;')
+    response['Content-Disposition'] = 'inline; filename=report.pdf'
+    response['Content-Transfer-Encoding'] = 'binary'
+    with tempfile.NamedTemporaryFile(delete=True) as output:
+        output.write(result)
+        output.flush()
+        output = open(output.name, 'rb')
+        response.write(output.read())
+
+    return response

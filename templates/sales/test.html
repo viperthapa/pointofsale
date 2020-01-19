@@ -57,7 +57,7 @@
                       <tbody id="summary-table-body">
                         <tr id="total-tr">
                           <td class="thick-line text-right"><strong>Total: </strong></td>
-                          <td class="thick-line text-right"><strong>₹0 </strong></td></tr>
+                          <td class="thick-line text-right"><strong>Rs.0 </strong></td></tr>
                         </tr>
                       </tbody>
                     </table>
@@ -70,7 +70,7 @@
             {% csrf_token %}
             <button type="button" class="btn btn-success" onclick="postOrder('{% url 'posapp:order' %}','{{ customer.identity }}')">Bill</button>
             <button type="button" class="btn" onclick="clearAllItems()">Clear</button>
-            <button type="button" class="btn btn-danger" onclick="location.href='#'">Cancel</button>
+            <!-- <button type="button" class="btn btn-danger" onclick="location.href='#'">Cancel</button> -->
           </div>
         </div>
       </div>
