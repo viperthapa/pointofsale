@@ -65,19 +65,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw nav_icon"></i>Dashboard</a>
+                            <a href="{% url 'posapp:home' %}"><i class="fa fa-dashboard fa-fw nav_icon"></i>Dashboard</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-book nav_icon"></i>suppliers</a>
+                            <a href="{% url 'posapp:supplierlist' %}"><i class="fa fa-book nav_icon"></i>suppliers</a>
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-users nav_icon"></i>customers</a>
+                            <a href="{% url 'posapp:customerlist' %}"><i class="fa fa-users nav_icon"></i>customers</a>
                             <!-- /.nav-second-level -->
                         </li>
 
                         <li>
-                            <a href="widgets.html"><i class="fa fa-flask nav_icon"></i>products</a>
+                            <a href="{% url 'posapp:productslist' %}"><i class="fa fa-flask nav_icon"></i>products</a>
                         </li>
                          <li>
                             <a href="#"><i class="fa fa-list-alt nav_icon"></i>sales</a>

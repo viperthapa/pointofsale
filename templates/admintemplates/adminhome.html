@@ -24,10 +24,12 @@
     <div style="margin: 0px;" class="row">
         <div class="col-md-4">    
             <div class="card">
-                    <div class="card-body">
-                                <i class="fa fa-user fa-4x" style="color:#fff"></i>
-                                <p><a href="{% url 'posapp:supplierlist' %}">Suppliers</a></p>
-                    </div>
+                    <a>
+                        <div class="card-body">
+                                        <i class="fa fa-user fa-4x" style="color:#fff"></i>
+                                        <p><a href="{% url 'posapp:supplierlist' %}">Suppliers</a></p>
+                        </div>
+                   </a>
             </div>
             
         </div>
@@ -56,7 +58,7 @@
                 <div class="card">
                         <i class="fa fa-dollar fa-4x" style="color:#fff"></i>
                         <div class="card-body">
-                        <p><a href="{% url 'posapp:salescreate' %}">Sales</a></p>
+                        <p><a href="{% url 'posapp:saleslist' %}">Sales</a></p>
                         </div>
                 </div>
                 
@@ -66,7 +68,7 @@
                 <div class="card">
                         <i class="fa fa-th fa-4x" style="color:#fff"></i>
                         <div class="card-body">
-                        <p class="text-default">Reports</p>
+                        <p><a href="{% url 'posapp:chart' %}">Reports</a></p>
                         </div>
                 </div>
                 

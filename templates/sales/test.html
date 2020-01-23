@@ -1,13 +1,18 @@
 {% extends 'admintemplates/adminbase.html' %}
 {% load static %}
 {% block content %}
+<style>
+   .row{
+     margin-left: auto;
+   }
+</style>
 <div class="row">
     <br>
     <br>
     <br>
 
     <div class="col-sm-6">
-      <div class="card">
+      <!-- <div class="card">
         <div class="card-body">
           <h3><u>Customer</u></h3>
             {% if customer.image %}
@@ -17,8 +22,19 @@
           <h4>Location:{{ customer.address }}</h4>
         
         </div>
+      </div> -->
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h2 class="card-title"><u>Customer</u></h2>
+          <p class="card-text">{% if customer.image %}
+            <img class="avatar img-thumbnail float-left img-fluid" src="{{ customer.image.url }}" style="width: 200px; margin-right: 1em;"/>
+          {% endif %}</p>
+          <a href="#" class="btn btn-lg btn-primary" style="margin-left:2px;width:195px;">{{ customer.customer }}</a>
+        </div>
       </div>
       <hr>
+
+      <!-- products  -->
       <div class="card">
         <div class="card-header">
           <h3><u>Add Products</u></h3>
@@ -26,14 +42,30 @@
         <div class="card-body">
           {% for product in products %}
             <a href="#" onclick="addItem({{ product.id }}, '{{ product.name }}', {{ product.price }})" class="btn btn-outline-secondary">
-                <img src="{{product.image.url}}" style="width: 100px; margin-left: 1em;">
+                <img src="{{product.image.url}}" style="width: 100px; margin-left: 1em;height: 100px;">
                 <br>
-              {{ product.name }}
+
+              <button style="margin:3px 0px 0px 7px;width: 105px;" class="btn btn-lg btn-danger">{{ product.name }}</button>
 
             </a>
           {% endfor %}
         </div>
       </div>
+
+      <!-- <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h2 class="card-title"><u>Add Products</u></h2>
+          {% for product in products %}
+            <a href="#" onclick="addItem({{ product.id }}, '{{ product.name }}', {{ product.price }})" class="btn btn-outline-secondary">
+              <img src="{{product.image.url}}" style="width: 100px; margin-left: 4px;">
+              <br>
+
+             </a>    
+            <a href="#" class="btn btn-lg btn-danger" style="margin-left:25px;width:120px;">{{product.name}}</a>
+          {% endfor %}
+          
+        </div>
+      </div> -->
     </div>
     <div class="col-sm-6">
       <div class="card">
@@ -68,8 +100,8 @@
           </div>
           <div class="btn-group special" role="group">
             {% csrf_token %}
-            <button type="button" class="btn btn-success" onclick="postOrder('{% url 'posapp:order' %}','{{ customer.identity }}')">Bill</button>
-            <button type="button" class="btn" onclick="clearAllItems()">Clear</button>
+            <button style="margin-left: 10px;" type="button" class="btn btn-success" onclick="postOrder('{% url 'posapp:order' %}','{{ customer.identity }}')">Bill</button>
+            <button style="margin-left: 10px;" type="button" class="btn" onclick="clearAllItems()">Clear</button>
             <!-- <button type="button" class="btn btn-danger" onclick="location.href='#'">Cancel</button> -->
           </div>
         </div>

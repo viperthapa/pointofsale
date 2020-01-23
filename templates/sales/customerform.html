@@ -9,7 +9,7 @@
             .card{
                 background-color:burlywood;
                 width: 100%;
-                margin-left:350px;
+                margin-left:407px;
                 height: 150px;
                 padding: 20px;
                 }
@@ -33,6 +33,7 @@
         <div class="card">
                 <div class="card-body">
                     <h2 style="text-align: center;">Customer</h2>
+                    
                     <form action="#" method="post"> 
                         {% csrf_token %}
                             <div class="input-group mb-3">
@@ -43,13 +44,19 @@
                                 <button class="btn btn-primary type="submit">Go &raquo;</button>
 
                             </div>
-                        
+                            
                     </form>
-
+                
                 </div>
+                
+                <p style="text-align: center;margin: 15px 0px 0px 240px;font-size: 15px;"><a href="{% url 'posapp:customercreate' %}" style="color: black;">Sign up</a> here.</p>
+            
         </div>
+
+
         
     </div>
+
 
 </body>
 {% endblock %}

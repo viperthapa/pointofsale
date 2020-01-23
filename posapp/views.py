@@ -12,7 +12,12 @@ from weasyprint import HTML
 import tempfile
 from django.http import HttpResponse
 
+from django.contrib import messages
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
+     
 # Create your views here.
 
 
@@ -132,6 +137,19 @@ class ProductListView(TemplateView):
 
 
 
+
+
+class SalesListView(TemplateView):
+    template_name = 'sales/salescreate.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['sales'] = Sales.objects.all()
+        context['order'] = OrderItem.objects.order_by('-timestamp')
+
+        return context
+
+
 #sales create 
 class SalesCreateView(FormView):
     template_name = 'sales/test.html'
@@ -150,18 +168,21 @@ class SalesCreateView(FormView):
 #create invoice 
 def CreateInvoiceView(request):
     if request.method == 'GET':
-        return render(request, 'sales/customerform.html')
+        customerform = CustomerForm
+        salesform = SalesCreateForm
+        # print(customerform,"88888")
+        return render(request, 'sales/customerform.html',{'customerform':customerform , 'salesform':salesform,})
     else:
         cid = request.POST.get('name',None)
+        print(cid)
         customer = Customer.objects.get(customer=cid)
         products = list(Product.objects.all())
-        
+        if customer is not None:
+            return render(request, 'sales/test.html', {'customer': customer, 'products': products})
+        else:
+            return messages.error(request, "Error!")
 
-        # context = { 'cust' : customer.identity,
-        #             'name' : customer.name,
-        #             'balance' : customer.balance,
-        #             'products': products, }
-        return render(request, 'sales/test.html', {'customer': customer, 'products': products})
+
 
 
 #order bill
@@ -172,6 +193,7 @@ def orderBill(request):
             raise AttributeError
         print(data)
         customer = Customer.objects.get(pk=data['customer_id'])
+        print(customer.email,'************')
         # print('********',customer.id)
         order = Sales.objects.create(customer=customer,
                                     total_price=data['total_price'],
@@ -182,6 +204,26 @@ def orderBill(request):
             customer.save()
         order.save()
         print(order.id)
+        # cus = customer.email
+        # subject, from_email, to = 'Greetings Messages', 'settings.EMAIL_HOST_USER', cus
+        # html_content = render_to_string('bill/emailmessage.html', {'customer':customer}) 
+            # render with dynamic value
+        # text_content = strip_tags(html_content) # Strip the html tag. So people can see the pure text at least.
+        # create the email, and attach the HTML version as well.
+        # msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+        # msg.attach_file('/home/ramthapa/Documents/djangoprojects/jobproject/static/email/logo.png')
+        # msg.attach_alternative(html_content, "text/html")
+        # msg.mixed_subtype = 'related'
+        # for f in ['logo.png']:
+        #     fp = open(os.path.join(os.path.dirname("/home/ramthapa/Documents/djangoprojects/jobproject/static/email/logo.png"), f), 'rb')
+        #     msg_img = MIMEImage(fp.read())
+        #     fp.close()
+        #     msg_img.add_header('Content-ID', '<{}>'.format(f))
+        #     msg.attach(msg_img)
+
+        # msg.send()
+        print('email succesfully send')
+
         return render(request, 'sales/orderbill.html', context={'id':order.id})
 
 
@@ -211,3 +253,15 @@ def BillGeneration(request, pk):
         response.write(output.read())
 
     return response
+
+#chart 
+
+class ChartView(TemplateView):
+    template_name = 'reports/chart.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['orders'] = OrderItem.objects.all()
+        context['sales'] = Sales.objects.all()
+
+        return context

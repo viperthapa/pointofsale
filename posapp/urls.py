@@ -11,7 +11,7 @@ urlpatterns = [
     path('logout/',LogoutView.as_view(),name = 'logout'),
     #supplier
     path('supplier/list/', SupplierListView.as_view(), name='supplierlist'),
-    path('customer/create/', SupplierCreateView.as_view(), name='studentcreate'),
+    path('supplier/create/', SupplierCreateView.as_view(), name='studentcreate'),
     path('supplier/update/<int:pk>/',
          SupplierUpdateView.as_view(), name='supplierupdate'),
     path('supplier/delete/<int:pk>/',
@@ -29,11 +29,21 @@ urlpatterns = [
      path('product/list/', ProductListView.as_view(), name='productslist'),
 
      #################### TODO:crud of products ##########
+     #sales list
+     path('sales/list/', SalesListView.as_view(), name='saleslist'),
+
+
      path('sales/create/',views.CreateInvoiceView,name = 'salescreate'),
 
      path('billing/order', views.orderBill, name='order'),
 
      path('bill/<int:pk>', views.BillGeneration, name='bill'),
+
+     #chart js
+     path('chart/',ChartView.as_view(),name='chart'),
+
+
+
 
 
 

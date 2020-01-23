@@ -1,0 +1,96 @@
+{% extends 'admintemplates/adminbase.html' %}
+{% load static %}
+{% block content %}
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css">
+</head>
+<body>
+<!-- <p>this is home</p> -->
+<!-----------------------------------------listview of employer and jobseekers------------>
+<!-- chart.js -->
+<div class="row">
+	<div class="col-md-6">
+		<h3 style="text-align: center;margin: 100px 0px 0px 390px;">Order statistics</h3><hr>
+		<canvas id="myChart" width="400" height="400"></canvas>
+
+	</div>
+		
+</div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js">	
+</script>
+<script>
+var ctx = document.getElementById('myChart');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    
+    data: {
+        labels: [{% for order in sales %}"{{ order.timestamp }}" ,{% endfor %}],
+        datasets: [{
+            label: 'Products statistics',
+
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+            	'#FF0000',
+            	'#00FF00',
+                '#0000FF',
+
+                
+            	
+
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+               
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 6)',
+                'rgba(54, 162, 235, 9)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+            ],
+            borderWidth: 1
+            
+
+        }]
+    },
+    options: {
+        
+        scales: {
+            // fontSize:90,
+
+            // defaultFontSize: 20
+        xAxes: [{
+            display: true,
+            scaleLabel: {
+            display: true,
+            fontSize:20,
+            labelString: 'Date'
+            }
+        }],
+        yAxes: [{
+            display: true,
+            scaleLabel: {
+            display: true,
+            fontSize:20,
+            labelString: 'Value'
+            },
+            ticks: {
+            min: 0,
+            max: 20,
+
+            // forces step size to be 5 units
+            // stepSize: 5 // <----- This prop sets the stepSize
+    }
+  }]
+}
+        
+    }
+});
+
+</script>
+{% endblock %}
+</body>
+</html>
