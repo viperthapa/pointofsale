@@ -27,6 +27,13 @@ class CustomerForm(forms.ModelForm):
         model = Customer
         fields = '__all__'
 
+#product
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = '__all__'
+
+
 
 #sales history
 class SalesCreateForm(forms.ModelForm):

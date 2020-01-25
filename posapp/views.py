@@ -135,7 +135,25 @@ class ProductListView(TemplateView):
         return context
 
 
+#product create
+class ProductCreateView(CreateView):
+    template_name = 'product/productadd.html'
+    form_class = ProductForm
+    success_url = reverse_lazy('posapp:productslist')
 
+
+#product update
+class ProductUpdateView(UpdateView):
+    template_name = 'product/productupdate.html'
+    model = Product
+    form_class = ProductForm
+    success_url = reverse_lazy("posapp:productslist")
+
+
+class ProductdeleteView(DeleteView):
+    template_name = 'product/productdelete.html'
+    model = Product
+    success_url = reverse_lazy("posapp:productslist")
 
 
 
@@ -170,11 +188,12 @@ def CreateInvoiceView(request):
     if request.method == 'GET':
         customerform = CustomerForm
         salesform = SalesCreateForm
+        customer = Customer.objects.all()
         # print(customerform,"88888")
-        return render(request, 'sales/customerform.html',{'customerform':customerform , 'salesform':salesform,})
+        return render(request, 'sales/customerform.html',{'customerform':customerform , 'salesform':salesform,'customer':customer})
     else:
-        cid = request.POST.get('name',None)
-        print(cid)
+        cid = request.POST.get('dropdown',None)
+        print(cid,'|||||||||||||')
         customer = Customer.objects.get(customer=cid)
         products = list(Product.objects.all())
         if customer is not None:
@@ -204,15 +223,15 @@ def orderBill(request):
             customer.save()
         order.save()
         print(order.id)
-        # cus = customer.email
-        # subject, from_email, to = 'Greetings Messages', 'settings.EMAIL_HOST_USER', cus
-        # html_content = render_to_string('bill/emailmessage.html', {'customer':customer}) 
+        cus = customer.email
+        subject, from_email, to = 'Greetings Messages', 'settings.EMAIL_HOST_USER', cus
+        html_content = render_to_string('bill/emailmessage.html', {'customer':customer}) 
             # render with dynamic value
-        # text_content = strip_tags(html_content) # Strip the html tag. So people can see the pure text at least.
+        text_content = strip_tags(html_content) # Strip the html tag. So people can see the pure text at least.
         # create the email, and attach the HTML version as well.
-        # msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
         # msg.attach_file('/home/ramthapa/Documents/djangoprojects/jobproject/static/email/logo.png')
-        # msg.attach_alternative(html_content, "text/html")
+        msg.attach_alternative(html_content, "text/html")
         # msg.mixed_subtype = 'related'
         # for f in ['logo.png']:
         #     fp = open(os.path.join(os.path.dirname("/home/ramthapa/Documents/djangoprojects/jobproject/static/email/logo.png"), f), 'rb')
@@ -221,7 +240,7 @@ def orderBill(request):
         #     msg_img.add_header('Content-ID', '<{}>'.format(f))
         #     msg.attach(msg_img)
 
-        # msg.send()
+        msg.send()
         print('email succesfully send')
 
         return render(request, 'sales/orderbill.html', context={'id':order.id})

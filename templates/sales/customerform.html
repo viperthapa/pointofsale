@@ -26,24 +26,32 @@
 <body>      
     
 
-<h3 class="text-center">Billing</h3>
+<h3 class="text-center">Customer</h3>
 
  <body style="margin: 0px;" class="row">
     <div class="col-md-4">    
         <div class="card">
                 <div class="card-body">
-                    <h2 style="text-align: center;">Customer</h2>
-                    
+                <button class="btn btn-danger"  style="text-align: center;margin: -1px 5px 17px 80px;font-size: 15px;border-radius: 10px;"><a href="{% url 'posapp:customercreate' %}">Add customer</a></button>
+
                     <form action="#" method="post"> 
                         {% csrf_token %}
-                            <div class="input-group mb-3">
+                            <div class="input-group mb-3" style="margin-left: 30px;">
                               <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Enter Customer name: </span>
+                                <!-- <span class="input-group-text" id="basic-addon1">Enter Customer name: </span> -->
                               </div>
 
                                 <!-- <p>{{ salesform.customer }}</p>   -->
-                                <input class="btn btn-default"  name="name" placeholder="customer name"/>
-                                <button class="btn btn-primary type="submit">Go &raquo;</button>
+                                <select name="dropdown" class="btn btn-success btn-md">
+                                    <option selected="selected" disabled>Select a Customer</option>
+                                    {% for cus in  customer %}
+                                        <option>{{ cus.customer  }}</option>
+                                    {% endfor %}
+                                    
+                                </select>
+                                <input  type="submit" value="Go &raquo;" style="border-radius: 18%;background-color: cornsilk;">
+                                <!-- <input class="btn btn-default"  name="ram" placeholder="customer name"/> -->
+                                <!-- <button class="btn btn-primary type="submit" style="border-radius: 20%;">Go &raquo;</button> -->
 
                             </div>
                             
@@ -51,7 +59,6 @@
                 
                 </div>
                 
-                <p style="text-align: center;margin: 15px 0px 0px 240px;font-size: 15px;"><a href="{% url 'posapp:customercreate' %}" style="color: black;">Sign up</a> here.</p>
             
         </div>
 

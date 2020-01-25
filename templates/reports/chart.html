@@ -26,7 +26,7 @@ var myChart = new Chart(ctx, {
     type: 'bar',
     
     data: {
-        labels: [{% for order in sales %}"{{ order.timestamp }}" ,{% endfor %}],
+        labels: [{% for order in sales %}"{{ order.timestamp|date:"d M Y" }}" ,{% endfor %}],
         datasets: [{
             label: 'Products statistics',
 

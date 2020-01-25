@@ -1,10 +1,11 @@
 {% extends 'admintemplates/adminbase.html' %}
 {% load static %}
 {% block content %}
+
 	<div class="row">
 		<div class="col-md-12 table-responsive-sm">
             <br>
-			<a href="#" class="btn btn-info"><i class="fa fa-plus"></i></a>
+			<a href="{% url 'posapp:productcreate' %}" class="btn btn-info"><i class="fa fa-plus"></i></a>
             <br>
 			<table class="table table-bordered">
 				<thead style="background-color: yellow;color:black;">
@@ -14,7 +15,6 @@
 						<th>productname</th>
 						<th>Brand</th>
                         <th>price</th>
-						<th>unit_type</th>
 						<th>action</th>
                         
 				
@@ -29,12 +29,11 @@
 						<td>{{ product.name }}</td>
 						<td>{{ product.brand_name }}</td>
                         <td>{{ product.price }}</td>
-						<td>{{ product.unit_type }}</td>
                         
 					
 						<td>
-                            <a href="#" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
-							<a href="#" class="btn btn-success"><i class="fa fa-trash"></i></a>
+                            <a href="{% url 'posapp:productupdate' product.pk %}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+							<a href="{% url 'posapp:productdelete' product.pk %}" class="btn btn-success"><i class="fa fa-trash"></i></a>
 
 						</td>
 

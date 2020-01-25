@@ -28,6 +28,16 @@ urlpatterns = [
      #products
      path('product/list/', ProductListView.as_view(), name='productslist'),
 
+     path('product/create/',ProductCreateView.as_view(),name = 'productcreate'),
+
+     path('product/update/<int:pk>/',
+         ProductUpdateView.as_view(), name='productupdate'),
+
+     
+     path('product/delete/<int:pk>/',
+         ProductdeleteView.as_view(), name='productdelete'),
+    
+
      #################### TODO:crud of products ##########
      #sales list
      path('sales/list/', SalesListView.as_view(), name='saleslist'),
