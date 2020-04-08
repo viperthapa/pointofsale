@@ -14,7 +14,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- Custom CSS -->
 <link href="{% static 'adminstatic/css/style.css' %}" rel='stylesheet' type='text/css' />
 <!-- Graph CSS -->
-<link href="{% static 'adminstatic/css/lines.css' %}" rel='stylesheet' type='text/css' />
+<!-- <link href="{% static 'adminstatic/css/lines.css' %}" rel='stylesheet' type='text/css' /> -->
 <!-- <link href="{% static 'adminstatic/css/font-awesome.css' %}" rel="stylesheet">  -->
 <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- jQuery -->
@@ -28,8 +28,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="{% static 'adminstatic/js/metisMenu.min.js' %}"></script>
 <script src="{% static 'adminstatic/js/custom.js' %}"></script>
 <!-- Graph JavaScript -->
-<script src="{% static 'adminstatic/js/d3.v3.js' %}"></script>
-<script src="{% static 'adminstatic/js/rickshaw.js' %}"></script>
+
 </head>
 <body>
 <div id="wrapper">
@@ -105,8 +104,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <!-- /.navbar-static-side -->
         </nav>
 
-        {% block banner %}{% endblock %}
-         <div id="page-wrapper">
+        <!-- {% block banner %}{% endblock %} -->
+        <div id="page-wrapper">
         <div class="graphs">
 
         {% block content %}
@@ -119,6 +118,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
    </div>
     <!-- /#wrapper -->
     <!-- Bootstrap Core JavaScript -->
-    <script src="{% static 'adminstatic/js/bootstrap.min.js' %}"></script>
+    <!-- <script src="{% static 'adminstatic/js/bootstrap.min.js' %}"></script> -->
 </body>
 </html>

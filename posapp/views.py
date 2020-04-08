@@ -186,7 +186,7 @@ class SalesCreateView(FormView):
 #create invoice 
 def CreateInvoiceView(request):
     if request.method == 'GET':
-        customerform = CustomerForm
+        customerform = CustomerForms
         salesform = SalesCreateForm
         customer = Customer.objects.all()
         # print(customerform,"88888")
